@@ -11,23 +11,22 @@
 
 set -x
 
+# Define log file path
+LOG_FILE="$HOME/resourceTracker.log"
+
 # AWS s3
 # AWS EC2
 # AWS Lambda
 # AWS IAM Users
 
-echo "Print list of s3 buckets"
-# list s3 buckets
-aws s3 ls > resourceTracker
+echo "Print list of S3 buckets" >> $LOG_FILE
+aws s3 ls >> $LOG_FILE
 
-echo "Print list of ec2 instances"
-# list EC2 instances
-aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId'
+echo "Print list of EC2 instances" >> $LOG_FILE
+aws ec2 describe-instances | jq '.Reservations[].Instances[].InstanceId' >> $LOG_FILE
 
-echo "Print list of lambda functions"
-# list aws lambda fucntions
-aws lambda list-functions > resourceTracker
+echo "Print list of Lambda functions" >> $LOG_FILE
+aws lambda list-functions >> $LOG_FILE
 
-echo "Print list of IAM users"
-# list IAM users
-aws iam list-users
+echo "Print list of IAM users" >> $LOG_FILE
+aws iam list-users >> $LOG_FILE
